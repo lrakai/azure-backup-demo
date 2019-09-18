@@ -114,6 +114,14 @@
         "bastionPublicIpAddressName": {
             "type": "string",
             "defaultValue": "lab-bastion-ip"
+        },
+        "bastionPublicIpAddressType": {
+            "type": "string",
+            "defaultValue": "Static"
+        },
+        "bastionPublicIpAddressSku": {
+            "type": "string",
+            "defaultValue": "Standard"
         }
     },
     "variables": {
@@ -193,10 +201,10 @@
             "apiVersion": "2019-02-01",
             "location": "[parameters('location')]",
             "properties": {
-                "publicIpAllocationMethod": "[parameters('publicIpAddressType')]"
+                "publicIpAllocationMethod": "[parameters('bastionPublicIpAddressType')]"
             },
             "sku": {
-                "name": "[parameters('publicIpAddressSku')]"
+                "name": "[parameters('bastionPublicIpAddressSku')]"
             }
         },
         {
