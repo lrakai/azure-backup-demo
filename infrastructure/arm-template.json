@@ -97,7 +97,7 @@
         },
         "diagnosticsStorageAccountPrefix": {
             "type": "string",
-            "defaultValue": "labasrdiag"
+            "defaultValue": "lababdiag"
         },
         "diagnosticsStorageAccountType": {
             "type": "string",
