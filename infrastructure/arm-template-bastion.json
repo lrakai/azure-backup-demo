@@ -54,6 +54,12 @@
                     "properties": {
                         "addressPrefix": "10.0.0.0/24"
                     }
+                },
+                {
+                    "name": "AzureBastionSubnet",
+                    "properties": {
+                        "addressPrefix": "10.0.15.0/27"
+                    }
                 }
             ]
         },
@@ -100,12 +106,29 @@
         "diagnosticsStorageAccountKind": {
             "type": "string",
             "defaultValue": "StorageV2"
+        },
+        "bastionHostName": {
+            "type": "string",
+            "defaultValue": "lab-bastion"
+        },
+        "bastionPublicIpAddressName": {
+            "type": "string",
+            "defaultValue": "lab-bastion-ip"
+        },
+        "bastionPublicIpAddressType": {
+            "type": "string",
+            "defaultValue": "Static"
+        },
+        "bastionPublicIpAddressSku": {
+            "type": "string",
+            "defaultValue": "Standard"
         }
     },
     "variables": {
         "nsgId": "[resourceId(resourceGroup().name, 'Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]",
         "vnetId": "[resourceId(resourceGroup().name,'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
         "subnetId": "[concat(variables('vnetId'), '/subnets/', parameters('subnetName'))]",
+        "bastionSubnetId": "[concat(variables('vnetId'), '/subnets/AzureBastionSubnet')]",
         "diagnosticsStorageAccountName": "[concat(parameters('diagnosticsStorageAccountPrefix'),uniqueString(resourceGroup().id,subscription().id))]"
     },
     "resources": [
@@ -173,6 +196,18 @@
             }
         },
         {
+            "name": "[parameters('bastionPublicIpAddressName')]",
+            "type": "Microsoft.Network/publicIpAddresses",
+            "apiVersion": "2019-02-01",
+            "location": "[parameters('location')]",
+            "properties": {
+                "publicIpAllocationMethod": "[parameters('bastionPublicIpAddressType')]"
+            },
+            "sku": {
+                "name": "[parameters('bastionPublicIpAddressSku')]"
+            }
+        },
+        {
             "name": "[parameters('virtualMachineName')]",
             "type": "Microsoft.Compute/virtualMachines",
             "apiVersion": "2019-03-01",
@@ -232,6 +267,32 @@
             "kind": "[parameters('diagnosticsStorageAccountKind')]",
             "sku": {
                 "name": "[parameters('diagnosticsStorageAccountType')]"
+            }
+        },
+        {
+            "type": "Microsoft.Network/bastionHosts",
+            "apiVersion": "2018-10-01",
+            "name": "[parameters('bastionHostName')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[concat('Microsoft.Network/publicIpAddresses/', parameters('bastionPublicIpAddressName'))]",
+                "[concat('Microsoft.Network/virtualNetworks/', parameters('virtualNetworkName'))]"
+            ],
+            "tags": {},
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "IpConf",
+                        "properties": {
+                            "subnet": {
+                                "id": "[variables('bastionSubnetId')]"
+                            },
+                            "publicIPAddress": {
+                                "id": "[resourceId(resourceGroup().name, 'Microsoft.Network/publicIpAddresses', parameters('bastionPublicIpAddressName'))]"
+                            }
+                        }
+                    }
+                ]
             }
         }
     ],
