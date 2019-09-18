@@ -15,7 +15,8 @@
                 "Microsoft.Compute/virtualMachines/redeploy/action",
                 "Microsoft.Compute/virtualMachines/generalize/action",
                 "Microsoft.Compute/virtualMachines/capture/action",
-                "Microsoft.Compute/virtualMachines/extensions/write"
+                "Microsoft.Compute/virtualMachines/extensions/write",
+                "Microsoft.Network/bastionHosts/write"
             ]
         }
     ],
@@ -148,6 +149,7 @@
                 "Microsoft.Network/networkSecurityGroups",
                 "Microsoft.Network/networkInterfaces",
                 "Microsoft.Network/publicIPAddresses",
+                "Microsoft.Network/bastionHosts",
                 "Microsoft.Compute/virtualMachines",
                 "Microsoft.Compute/virtualMachines/extensions",
                 "Microsoft.Compute/disks",
