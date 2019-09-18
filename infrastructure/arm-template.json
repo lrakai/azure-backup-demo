@@ -298,7 +298,7 @@
                                 "id": "[variables('bastionSubnetId')]"
                             },
                             "publicIPAddress": {
-                                "id": "[resourceId(resourceGroup().id, 'Microsoft.Network/publicIpAddresses', parameters('bastionPublicIpAddressName'))]"
+                                "id": "[resourceId(resourceGroup().name, 'Microsoft.Network/publicIpAddresses', parameters('bastionPublicIpAddressName'))]"
                             }
                         }
                     }
