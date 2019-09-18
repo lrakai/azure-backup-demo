@@ -1,5 +1,5 @@
 $Lab="azure-backup"
-$Region="WestUS"
+$Region="EastUS"
 $User="student-lab-01@labscloudacademy.onmicrosoft.com"
 $Pass="labAccount1"
 $PolicyDefinitionName="lab-policy"
