@@ -172,7 +172,8 @@
         },
         "disallowedActions": {
             "value": [
-                "Microsoft.Compute/unregister/action"
+                "Microsoft.Compute/unregister/action",
+                "Microsoft.RecoveryServices/vaults/replicationFabrics/write"
             ]
         }
     }
