@@ -11,11 +11,9 @@
                 "Microsoft.MarketplaceOrdering/*",
                 "Microsoft.Resources/tags/write",
                 "Microsoft.Resources/tags/delete",
-                "Microsoft.Compute/virtualMachines/write",
                 "Microsoft.Compute/virtualMachines/redeploy/action",
                 "Microsoft.Compute/virtualMachines/generalize/action",
-                "Microsoft.Compute/virtualMachines/capture/action",
-                "Microsoft.Compute/virtualMachines/extensions/write"
+                "Microsoft.Compute/virtualMachines/capture/action"
             ]
         }
     ],
@@ -152,6 +150,10 @@
                 "Microsoft.Compute/virtualMachines/extensions",
                 "Microsoft.Compute/disks",
                 "Microsoft.RecoveryServices/vaults",
+                "Microsoft.RecoveryServices/vaults/backupPolicies",
+                "Microsoft.RecoveryServices/vaults/backupFabrics",
+                "Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers",
+                "Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/protectedItems",
                 "Microsoft.Storage/storageAccounts"
             ]
         },
@@ -167,7 +169,7 @@
         },
         "allowedVmExtensionTypes": {
             "value": [
-                "CustomScriptExtension"
+                "VMSnapshot"
             ]
         },
         "disallowedActions": {
