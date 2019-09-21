@@ -1,6 +1,8 @@
 # azure-backup-demo
 
-Demonstration of using Azure Backup.
+Demonstration of using Azure Backup to backup a VM.
+
+![Final environment](https://user-images.githubusercontent.com/3911650/65367884-d34cb180-dbf5-11e9-9be4-279cc6481459.png)
 
 ## Getting Started
 
